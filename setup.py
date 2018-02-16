@@ -3,7 +3,7 @@ from distutils.core import setup
 setup(
       name='pbkdf2helper',
       packages=['pbkdf2helper'],
-      version='0.0.2',
+      version='0.0.3',
       description='This Python module implements the basic PBKDF2 Helper-functions',
 
       author='Alexander Kleinschmidt (kungalex)',
