@@ -6,7 +6,7 @@ Example:
 
     >>import pbkdf2helper
 
-    >>encoded = pbkdf2helper.encode("secret", pbkdf2helper.generate_salt(), 1000)
+    >>encoded = pbkdf2helper.encode("secret", "sha256", pbkdf2helper.generate_salt(12), 1000)
     'sha256$1000$sooDhmF4$GloPulbaSfWsoIhU34mBzURTZTszCgfNoJ4myYcF1c4='
 
     >>pbkdf2helper.verify("secret", encoded)

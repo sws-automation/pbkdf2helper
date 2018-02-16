@@ -13,7 +13,7 @@ hashlib.sha256 and hmac
 Example:
 
 >>> import pbkdf2helper
->>> encoded = pbkdf2helper.encode("secret", pbkdf2helper.generate_salt(), 1000)
+>>> encoded = pbkdf2helper.encode("secret", "sha256", pbkdf2helper.generate_salt(12), 1000)
 >>> encoded
 'sha256$1000$sooDhmF4$GloPulbaSfWsoIhU34mBzURTZTszCgfNoJ4myYcF1c4='
 
@@ -32,15 +32,15 @@ license: MIT, see LICENSE for more details.
 """
 
 
-algorithm = "sha256"
 digest = hashlib.sha256
 alphabet = string.ascii_letters + string.digits
 
 
-def encode(password, salt, iterations):
+def encode(password, algorithm, salt, iterations):
     """
     Encode a Password
     :param password: Password
+    :param algorithm
     :param salt: Salt
     :param iterations: iterations
     :return: PBKDF2 hashed Password
@@ -58,9 +58,8 @@ def verify(password, encoded):
     :return: True or False
     """
     algorithm, iterations, salt, h = split(encoded)
-    assert algorithm == algorithm
 
-    to_verify = encode(password, salt, int(iterations))
+    to_verify = encode(password, algorithm, salt, int(iterations))
     return hmac.compare_digest(to_verify.encode(), encoded.encode())
 
 
@@ -71,7 +70,6 @@ def split(encoded):
     :return: algorithm, iterations, salt, hash
     """
     algorithm, iterations, salt, h = encoded.split('$', 3)
-    assert algorithm == algorithm
     return algorithm, iterations, salt, h
 
 
