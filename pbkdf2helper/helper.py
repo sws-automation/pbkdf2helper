@@ -1,7 +1,7 @@
+import base64
 import hashlib
 import hmac
-import random
-import base64
+import secrets
 import string
 
 """
@@ -78,4 +78,4 @@ def generate_salt(length):
     Generate a unique random Salt
     :return: unique random Salt
     """
-    return ''.join(random.choice(alphabet) for i in range(length))
+    return ''.join(secrets.choice(alphabet) for _ in range(length))
